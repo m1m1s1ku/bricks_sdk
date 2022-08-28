@@ -11,6 +11,27 @@ setGlobalDispatcher(mockAgent);
 const mockPool = mockAgent.get(kApiBaseURL);
 
 describe('Api', () => {
+  it('get the current API Version', async () => {
+    const sdk = new Api();
+
+    const mockedResponse = '1.9.0';
+
+    mockPool
+      .intercept({
+        path: 'version',
+        method: 'POST',
+      })
+      .reply(200, mockedResponse);
+
+    const response = await sdk.getVersion();
+
+    if (isExternalError(response)) {
+      expect(response).toHaveProperty('message');
+    } else {
+      expect(response).toBe(mockedResponse);
+    }
+  });
+
   describe('login', () => {
     it('calls the api with the right parameters', async () => {
       const sdk = new Api();

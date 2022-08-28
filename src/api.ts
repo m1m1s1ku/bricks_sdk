@@ -36,6 +36,7 @@ import {
 import { GetCustomerDealsInput, GetCustomerDealsOutput } from './schema/customers/deals';
 import { DeleteDealInput, DeleteDealOutput } from './schema/marketplace/delete';
 import { FAQInput, FAQOutput } from './schema/help/faq';
+import { VersionOutput } from './schema/version';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -390,6 +391,19 @@ export class Api {
         }),
       },
       FAQOutput
+    );
+  }
+
+  public async getVersion(): Promise<z.infer<typeof VersionOutput> | RemoteError | string> {
+    return this.#callApi(
+      `version`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          ...defaultHeaders,
+        }),
+      },
+      VersionOutput
     );
   }
 
