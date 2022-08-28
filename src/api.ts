@@ -18,6 +18,7 @@ import {
   PropertyInput,
   PropertyOutput,
 } from './schema/properties/property';
+import { PurchaseInput, PurchaseOutput } from './schema/marketplace/purchase';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -191,6 +192,25 @@ export class Api {
     );
   }
 
+  public async purchaseDeal({
+    token,
+    dealId,
+  }: z.infer<typeof PurchaseInput>): Promise<
+    z.infer<typeof PurchaseOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `marketplace/deal/${dealId}/purchase`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      PurchaseOutput
+    );
+  }
+
   static async #call<T>(
     path: string,
     options: RequestInit,
@@ -205,7 +225,7 @@ export class Api {
     try {
       const body = (await res.json()) as T;
       try {
-        console.warn('path', path, 'body', body);
+        // console.warn('path', path, 'body', body);
         const output = await type.parseAsync(body);
         return output;
       } catch (err) {
