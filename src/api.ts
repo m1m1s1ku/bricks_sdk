@@ -40,6 +40,10 @@ export type RemoteError = z.infer<typeof BricksError>;
 
 export const kApiBaseURL = 'https://api.bricks.co/';
 
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+};
+
 export class Api {
   public async login({
     username,
@@ -52,7 +56,7 @@ export class Api {
       {
         method: 'POST',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
         }),
         body: JSON.stringify({
           email: username,
@@ -71,7 +75,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -89,7 +93,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -107,7 +111,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -125,7 +129,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -143,7 +147,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -180,7 +184,7 @@ export class Api {
         method: 'GET',
         body: data,
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -198,7 +202,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -216,7 +220,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -237,7 +241,7 @@ export class Api {
       {
         method: 'POST',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
         body: JSON.stringify({
@@ -269,7 +273,7 @@ export class Api {
         body: data,
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -288,7 +292,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -307,7 +311,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -326,7 +330,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -345,7 +349,7 @@ export class Api {
       {
         method: 'GET',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
@@ -364,7 +368,7 @@ export class Api {
       {
         method: 'DELETE',
         headers: new Headers({
-          'Content-Type': 'application/json',
+          ...defaultHeaders,
           Authorization: `Bearer ${token}`,
         }),
       },
