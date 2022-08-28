@@ -27,6 +27,13 @@ import {
   HistoricalPortfolioChartInput,
   HistoricalPortfolioChartOutput,
 } from './schema/customers/historical-portfolio-chart';
+import {
+  CanSellTodayInput,
+  CanSellTodayOutput,
+  MakeDealInput,
+  MakeDealOutput,
+} from './schema/marketplace/deal';
+import { GetCustomerDealsInput, GetCustomerDealsOutput } from './schema/customers/deals';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -107,6 +114,24 @@ export class Api {
     );
   }
 
+  public async getCustomerDeals({
+    token,
+  }: z.infer<typeof GetCustomerDealsInput>): Promise<
+    z.infer<typeof GetCustomerDealsOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `customers/marketplace/deals`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      GetCustomerDealsOutput
+    );
+  }
+
   public async getReferrals({
     token,
   }: z.infer<typeof ReferralsInput>): Promise<
@@ -177,6 +202,50 @@ export class Api {
         }),
       },
       PastDealsOutput
+    );
+  }
+
+  public async canSellToday({
+    token,
+  }: z.infer<typeof CanSellTodayInput>): Promise<
+    z.infer<typeof CanSellTodayOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `marketplace/deal/can-sell-today`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      CanSellTodayOutput
+    );
+  }
+
+  public async makeDeal({
+    token,
+    amount,
+    price,
+    propertyId,
+  }: z.infer<typeof MakeDealInput>): Promise<
+    z.infer<typeof MakeDealOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `marketplace/deal`,
+      {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+        body: JSON.stringify({
+          amount,
+          price,
+          propertyId,
+        }),
+      },
+      MakeDealOutput
     );
   }
 
