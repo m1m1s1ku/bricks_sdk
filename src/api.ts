@@ -34,6 +34,7 @@ import {
   MakeDealOutput,
 } from './schema/marketplace/deal';
 import { GetCustomerDealsInput, GetCustomerDealsOutput } from './schema/customers/deals';
+import { DeleteDealInput, DeleteDealOutput } from './schema/marketplace/delete';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -349,6 +350,25 @@ export class Api {
         }),
       },
       PurchaseOutput
+    );
+  }
+
+  public async deleteDeal({
+    token,
+    dealId,
+  }: z.infer<typeof DeleteDealInput>): Promise<
+    z.infer<typeof DeleteDealOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `marketplace/deal/${dealId}`,
+      {
+        method: 'DELETE',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      DeleteDealOutput
     );
   }
 
