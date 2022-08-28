@@ -53,9 +53,12 @@ async function retrieveCreds() {
     return;
   }
 
+  const deals = await api.getDeals({ token });
+
   logger.info({
     token,
     user,
+    deals,
   });
 })().catch((e) => {
   logger.fatal(e);
