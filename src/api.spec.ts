@@ -39,8 +39,6 @@ describe('Api', () => {
       const response = await sdk.login(creds);
 
       if (isExternalError(response)) {
-        expect(response).toHaveProperty('statusCode');
-        expect(response).toHaveProperty('error');
         expect(response).toHaveProperty('message');
       } else {
         expect(response).toHaveProperty('token');

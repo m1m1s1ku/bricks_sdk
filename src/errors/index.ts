@@ -4,7 +4,7 @@ import { BricksError } from './bricks_error';
 
 function isBricksError(err: unknown): err is z.infer<typeof BricksError> {
   const bricksError = err as z.infer<typeof BricksError>;
-  return !!(bricksError.statusCode && bricksError.message && bricksError.error);
+  return !!bricksError.statusCode || !!bricksError.message;
 }
 
 export function isExternalError(err: unknown): err is RemoteError {
