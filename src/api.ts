@@ -35,6 +35,7 @@ import {
 } from './schema/marketplace/deal';
 import { GetCustomerDealsInput, GetCustomerDealsOutput } from './schema/customers/deals';
 import { DeleteDealInput, DeleteDealOutput } from './schema/marketplace/delete';
+import { FAQInput, FAQOutput } from './schema/help/faq';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -373,6 +374,22 @@ export class Api {
         }),
       },
       DeleteDealOutput
+    );
+  }
+
+  public async getFAQ({
+    token,
+  }: z.infer<typeof FAQInput>): Promise<z.infer<typeof FAQOutput> | RemoteError | string> {
+    return this.#callApi(
+      `help/faq`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          ...defaultHeaders,
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      FAQOutput
     );
   }
 
