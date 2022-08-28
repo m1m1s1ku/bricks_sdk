@@ -38,7 +38,7 @@ import { DeleteDealInput, DeleteDealOutput } from './schema/marketplace/delete';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
-const kApiBaseURL = 'https://api.bricks.co/';
+export const kApiBaseURL = 'https://api.bricks.co/';
 
 export class Api {
   public async login({
