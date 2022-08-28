@@ -16,6 +16,7 @@ import {
   BrickPriceChartOutput,
   MonthlyDividendsChartOutput,
   PropertiesInput,
+  PropertiesOutput,
   PropertyInput,
   PropertyOutput,
 } from './schema/properties/property';
@@ -185,7 +186,7 @@ export class Api {
     take = 10,
     withTransaction = true,
   }: z.infer<typeof PropertiesInput>): Promise<
-    z.infer<typeof PropertyOutput> | RemoteError | string
+    z.infer<typeof PropertiesOutput> | RemoteError | string
   > {
     const data = new URLSearchParams();
     data.set('cursor', `${cursor}`);
@@ -202,7 +203,7 @@ export class Api {
           Authorization: `Bearer ${token}`,
         }),
       },
-      PropertyOutput
+      PropertiesOutput
     );
   }
 
