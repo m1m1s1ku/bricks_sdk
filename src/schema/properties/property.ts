@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+export const PropertiesInput = z.object({
+  token: z.string(),
+  take: z.number().default(10).optional(),
+  cursor: z.number().default(0).optional(),
+  withTransaction: z.boolean().default(true).optional(),
+});
+
 export const PropertyInput = z.object({
   token: z.string(),
   propertyId: z.string(),

@@ -10,7 +10,7 @@ It uses private API which may change and break this library at any moment.
 
 ## TODO :
 
-- [ ] Buy / sell part
+- [ ] sell bricks part
 
 ## Installation
 

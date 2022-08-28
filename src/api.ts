@@ -15,10 +15,17 @@ import { PastDealsInput, PastDealsOutput } from './schema/marketplace/past';
 import {
   BrickPriceChartOutput,
   MonthlyDividendsChartOutput,
+  PropertiesInput,
   PropertyInput,
   PropertyOutput,
 } from './schema/properties/property';
 import { PurchaseInput, PurchaseOutput } from './schema/marketplace/purchase';
+import {
+  HistoricalDividendsChartInput,
+  HistoricalDividendsChartOutput,
+  HistoricalPortfolioChartInput,
+  HistoricalPortfolioChartOutput,
+} from './schema/customers/historical-portfolio-chart';
 
 export type RemoteError = z.infer<typeof BricksError>;
 
@@ -60,6 +67,42 @@ export class Api {
         }),
       },
       MeOutput
+    );
+  }
+
+  public async getHistoricalPortfolioChart({
+    token,
+  }: z.infer<typeof HistoricalPortfolioChartInput>): Promise<
+    z.infer<typeof HistoricalPortfolioChartOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `customers/historical-portfolio-chart`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      HistoricalPortfolioChartOutput
+    );
+  }
+
+  public async getHistoricalDividendsChart({
+    token,
+  }: z.infer<typeof HistoricalDividendsChartInput>): Promise<
+    z.infer<typeof HistoricalDividendsChartOutput> | RemoteError | string
+  > {
+    return this.#callApi(
+      `customers/historical-dividends-chart`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      HistoricalDividendsChartOutput
     );
   }
 
@@ -108,6 +151,7 @@ export class Api {
       `marketplace/deals`,
       {
         method: 'GET',
+        body: data,
         headers: new Headers({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -132,6 +176,33 @@ export class Api {
         }),
       },
       PastDealsOutput
+    );
+  }
+
+  public async getProperties({
+    token,
+    cursor = 0,
+    take = 10,
+    withTransaction = true,
+  }: z.infer<typeof PropertiesInput>): Promise<
+    z.infer<typeof PropertyOutput> | RemoteError | string
+  > {
+    const data = new URLSearchParams();
+    data.set('cursor', `${cursor}`);
+    data.set('take', `${take}`);
+    data.set('withTransactions', `${withTransaction}`);
+
+    return this.#callApi(
+      `properties`,
+      {
+        body: data,
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }),
+      },
+      PropertyOutput
     );
   }
 
