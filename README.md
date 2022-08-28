@@ -8,6 +8,10 @@ It uses private API which may change and break this library at any moment.
 
 ![Tests](https://github.com/m1m1s1ku/bricks_sdk/actions/workflows/ci.yml/badge.svg)
 
+## TODO :
+
+- [ ] Buy / sell part
+
 ## Installation
 
 ```
