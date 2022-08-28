@@ -51,9 +51,9 @@ export class Api {
       'customers/email/sign-in',
       {
         method: 'POST',
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
-        },
+        }),
         body: JSON.stringify({
           email: username,
           password,
