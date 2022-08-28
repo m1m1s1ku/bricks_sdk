@@ -1,6 +1,6 @@
 {
   "name": "@m1m1s1ku/bricks_sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript library for accessing the French fintech company Bricks.",
   "main": "./lib/index.js",
   "exports": {
